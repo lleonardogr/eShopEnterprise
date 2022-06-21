@@ -13,15 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{54
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identidade", "Identidade", "{4F02E7D6-4B8B-4CF2-9B8F-88700A40E606}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ese.Identidade.Api", "src\services\Ese.Identidade.Api\Ese.Identidade.Api.csproj", "{1000092B-746C-4FA7-8605-F423E6A6AC39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ese.Identidade.Api", "src\services\Ese.Identidade.Api\Ese.Identidade.Api.csproj", "{1000092B-746C-4FA7-8605-F423E6A6AC39}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mvc", "Mvc", "{AF5E7836-5FFD-4521-B8EC-E3A8DF681315}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ese.WebApp.Mvc", "src\web\Ese.WebApp.Mvc\Ese.WebApp.Mvc.csproj", "{85C4AC5F-9614-4C4F-843E-4EB37AD5CE48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ese.WebApp.Mvc", "src\web\Ese.WebApp.Mvc\Ese.WebApp.Mvc.csproj", "{85C4AC5F-9614-4C4F-843E-4EB37AD5CE48}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D30556F3-DCC7-43E3-B168-9C532D4F7A78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ese.Core", "src\buildingBlocks\Ese.Core\Ese.Core.csproj", "{9F18B550-4B9D-4C32-807F-3519C8E06429}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ese.Core", "src\buildingBlocks\Ese.Core\Ese.Core.csproj", "{9F18B550-4B9D-4C32-807F-3519C8E06429}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Carrinho", "Carrinho", "{2422BB71-DDF4-4C9A-B608-0779C64D0FA3}"
 EndProject
@@ -33,15 +33,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pagamento", "Pagamento", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pedido", "Pedido", "{BB1CF0A7-4845-4090-922A-31E98BE54EFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ese.Carrinho.Api", "src\services\Ese.Carrinho.Api\Ese.Carrinho.Api.csproj", "{CDA0195C-B365-4E95-885A-0F6BBC9F5AA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ese.Carrinho.Api", "src\services\Ese.Carrinho.Api\Ese.Carrinho.Api.csproj", "{CDA0195C-B365-4E95-885A-0F6BBC9F5AA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ese.Catalogo.Api", "src\services\Ese.Catalogo.Api\Ese.Catalogo.Api.csproj", "{16121AC0-1188-49C3-8D02-3B3759C19641}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ese.Catalogo.Api", "src\services\Ese.Catalogo.Api\Ese.Catalogo.Api.csproj", "{16121AC0-1188-49C3-8D02-3B3759C19641}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ese.Cliente.Api", "src\services\Ese.Cliente.Api\Ese.Cliente.Api.csproj", "{9AED668B-8DA7-4484-8A2B-7EECA390720C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ese.Cliente.Api", "src\services\Ese.Cliente.Api\Ese.Cliente.Api.csproj", "{9AED668B-8DA7-4484-8A2B-7EECA390720C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ese.Pagamento.Api", "src\services\Ese.Pagamento.Api\Ese.Pagamento.Api.csproj", "{0DEEF110-77B3-4A8D-A0EC-01631264EC44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ese.Pagamento.Api", "src\services\Ese.Pagamento.Api\Ese.Pagamento.Api.csproj", "{0DEEF110-77B3-4A8D-A0EC-01631264EC44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ese.Pedido.Api", "src\services\Ese.Pedido.Api\Ese.Pedido.Api.csproj", "{DE7EB917-EAE4-4963-A773-493D73787C48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ese.Pedido.Api", "src\services\Ese.Pedido.Api\Ese.Pedido.Api.csproj", "{DE7EB917-EAE4-4963-A773-493D73787C48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
