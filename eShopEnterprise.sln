@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32602.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{B58BE4A6-646B-4D4E-AB70-F6D4522BF0FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AFE69C25-ADAC-4820-9277-CD6C54B612CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{91C0A23D-6027-4B11-BA1E-ADD1B28CA920}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{540B1F53-1FD5-41DE-9DD0-9400257EF376}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identidade", "Identidade", "{4F02E7D6-4B8B-4CF2-9B8F-88700A40E606}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ese.Identidade.Api", "src\services\Ese.Identidade.Api\Ese.Identidade.Api.csproj", "{1000092B-746C-4FA7-8605-F423E6A6AC39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1000092B-746C-4FA7-8605-F423E6A6AC39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1000092B-746C-4FA7-8605-F423E6A6AC39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1000092B-746C-4FA7-8605-F423E6A6AC39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1000092B-746C-4FA7-8605-F423E6A6AC39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B58BE4A6-646B-4D4E-AB70-F6D4522BF0FE} = {AFE69C25-ADAC-4820-9277-CD6C54B612CF}
+		{91C0A23D-6027-4B11-BA1E-ADD1B28CA920} = {AFE69C25-ADAC-4820-9277-CD6C54B612CF}
+		{540B1F53-1FD5-41DE-9DD0-9400257EF376} = {AFE69C25-ADAC-4820-9277-CD6C54B612CF}
+		{4F02E7D6-4B8B-4CF2-9B8F-88700A40E606} = {540B1F53-1FD5-41DE-9DD0-9400257EF376}
+		{1000092B-746C-4FA7-8605-F423E6A6AC39} = {4F02E7D6-4B8B-4CF2-9B8F-88700A40E606}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BD2DC93A-C268-4CF3-B7B7-594D4FC34B12}
+	EndGlobalSection
+EndGlobal
