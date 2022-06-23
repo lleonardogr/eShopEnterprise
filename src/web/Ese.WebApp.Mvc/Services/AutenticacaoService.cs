@@ -12,7 +12,7 @@ namespace Ese.WebApp.Mvc.Services
             _httpClient = httpClient;
         }
 
-        public async Task<string> Login(UsuarioLoginViewModel usuarioLogin)
+        public async Task<UsuarioRespostaLoginViewModel> Login(UsuarioLoginViewModel usuarioLogin)
         {
             var loginContent = new StringContent(
                 JsonSerializer.Serialize(usuarioLogin),
@@ -20,13 +20,16 @@ namespace Ese.WebApp.Mvc.Services
                 "application/json");
 
             var response  = await _httpClient.PostAsync("https://localhost:44311/api/identidade/autenticar", loginContent);
-            
-            var teste = await response.Content.ReadAsStringAsync();
 
-            return JsonSerializer.Deserialize<string>(await response.Content.ReadAsStringAsync());
+            var options = new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            return JsonSerializer.Deserialize<UsuarioRespostaLoginViewModel>(await response.Content.ReadAsStringAsync(), options);
         }
 
-        public async Task<string> Registro(UsuarioRegistroViewModel usuarioRegistro)
+        public async Task<UsuarioRespostaLoginViewModel> Registro(UsuarioRegistroViewModel usuarioRegistro)
         {
             var registroContent = new StringContent(
                 JsonSerializer.Serialize(usuarioRegistro),
@@ -35,7 +38,12 @@ namespace Ese.WebApp.Mvc.Services
 
             var response = await _httpClient.PostAsync("https://localhost:7033/api/identidade/registrar", registroContent);
 
-            return JsonSerializer.Deserialize<string>(await response.Content.ReadAsStringAsync());
+            var options = new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            return JsonSerializer.Deserialize<UsuarioRespostaLoginViewModel>(await response.Content.ReadAsStringAsync());
         }
     }
 }
