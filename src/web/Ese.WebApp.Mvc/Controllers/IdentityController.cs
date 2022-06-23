@@ -1,10 +1,18 @@
 ﻿using Ese.WebApp.Mvc.Models;
+using Ese.WebApp.Mvc.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ese.WebApp.Mvc.Controllers
 {
     public class IdentityController : Controller
     {
+        private readonly IAutenticacaoService _autenticationService;
+
+        public IdentityController(IAutenticacaoService autenticationService)
+        {
+            _autenticationService = autenticationService;
+        }
+
         [HttpGet]
         [Route("nova-conta")]
         public IActionResult Registro()
@@ -19,7 +27,7 @@ namespace Ese.WebApp.Mvc.Controllers
             if (!ModelState.IsValid) return View(usuarioRegistro);
             
             // API-Registro
-
+            
             if(false)
                 return View(usuarioRegistro);
 
@@ -43,6 +51,7 @@ namespace Ese.WebApp.Mvc.Controllers
             if (!ModelState.IsValid) return View(usuarioLogin);
 
             // API-Registro
+            var resposta = await _autenticationService.Login(usuarioLogin);
 
             if (false)
                 return View(usuarioLogin);
