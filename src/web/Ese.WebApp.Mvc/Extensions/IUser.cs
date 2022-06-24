@@ -1,5 +1,4 @@
 ﻿using System.Security.Claims;
-using Microsoft.AspNet.Identity
 
 namespace Ese.WebApp.Mvc.Extensions
 {
@@ -72,7 +71,7 @@ namespace Ese.WebApp.Mvc.Extensions
             if (principal == null)
                 throw new ArgumentException(nameof(principal));
 
-            var claim = principal.FindFirst(ClaimTypes.NameIdentifier);
+            var claim = principal.FindFirst("sub");
             return claim?.Value;
         }
 
@@ -81,7 +80,7 @@ namespace Ese.WebApp.Mvc.Extensions
             if (principal == null)
                 throw new ArgumentException(nameof(principal));
 
-            var claim = principal.FindFirst(ClaimTypes.Email);
+            var claim = principal.FindFirst("email");
             return claim?.Value;
         }
 

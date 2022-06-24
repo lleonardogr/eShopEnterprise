@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace Ese.WebApp.Mvc.Services
 {
-    public class AutenticacaoService : IAutenticacaoService
+    public class AutenticacaoService : Service, IAutenticacaoService
     {
         private readonly HttpClient _httpClient;
         public AutenticacaoService(HttpClient httpClient)
@@ -19,12 +19,20 @@ namespace Ese.WebApp.Mvc.Services
                 Encoding.UTF8,
                 "application/json");
 
-            var response  = await _httpClient.PostAsync("https://localhost:44311/api/identidade/autenticar", loginContent);
+            var response = await _httpClient.PostAsync("https://localhost:44311/api/identidade/autenticar", loginContent);
 
             var options = new JsonSerializerOptions()
             {
                 PropertyNameCaseInsensitive = true
             };
+
+            if (!TratarErrosResponse(response))    
+                return new UsuarioRespostaLoginViewModel()
+                {
+                    ResponseResult = JsonSerializer.Deserialize<ResponseResultViewModel>(
+                        await response.Content.ReadAsStringAsync(), options)
+                };
+            
 
             return JsonSerializer.Deserialize<UsuarioRespostaLoginViewModel>(await response.Content.ReadAsStringAsync(), options);
         }
@@ -42,6 +50,13 @@ namespace Ese.WebApp.Mvc.Services
             {
                 PropertyNameCaseInsensitive = true
             };
+
+            if (!TratarErrosResponse(response))
+                return new UsuarioRespostaLoginViewModel()
+                {
+                    ResponseResult = JsonSerializer.Deserialize<ResponseResultViewModel>(
+                        await response.Content.ReadAsStringAsync(), options)
+                };
 
             return JsonSerializer.Deserialize<UsuarioRespostaLoginViewModel>(await response.Content.ReadAsStringAsync());
         }

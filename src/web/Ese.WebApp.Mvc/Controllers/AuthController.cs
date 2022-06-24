@@ -8,11 +8,11 @@ using System.Security.Claims;
 
 namespace Ese.WebApp.Mvc.Controllers
 {
-    public class IdentityController : Controller
+    public class AuthController : MainController
     {
         private readonly IAutenticacaoService _autenticationService;
 
-        public IdentityController(IAutenticacaoService autenticationService)
+        public AuthController(IAutenticacaoService autenticationService)
         {
             _autenticationService = autenticationService;
         }
@@ -33,7 +33,7 @@ namespace Ese.WebApp.Mvc.Controllers
             // API-Registro
             var resposta = await _autenticationService.Registro(usuarioRegistro);
 
-            if(false)
+            if (ResponsePossuiErros(resposta.ResponseResult))
                 return View(usuarioRegistro);
 
             //Relizar Login na App
@@ -55,13 +55,11 @@ namespace Ese.WebApp.Mvc.Controllers
         {
             if (!ModelState.IsValid) return View(usuarioLogin);
 
-            // API-Registro
             var resposta = await _autenticationService.Login(usuarioLogin);
 
-            if (false)
+            if (ResponsePossuiErros(resposta.ResponseResult))
                 return View(usuarioLogin);
 
-            //Relizar Login na App
             await RealizarLogin(resposta);
 
             return RedirectToAction("Index", "Home");
