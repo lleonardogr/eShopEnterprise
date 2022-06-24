@@ -1,4 +1,6 @@
-﻿namespace Ese.WebApp.Mvc.Configuration
+﻿using Ese.WebApp.Mvc.Extensions;
+
+namespace Ese.WebApp.Mvc.Configuration
 {
     public static class WebAppConfig
     {
@@ -13,8 +15,8 @@
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseExceptionHandler("/erro/500");
+                app.UseStatusCodePagesWithRedirects("erro/{0}");
                 app.UseHsts();
             }
 
@@ -24,6 +26,7 @@
             app.UseRouting();
 
             app.UseIdentityConfiguration();
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.MapControllerRoute(
                 name: "default",
