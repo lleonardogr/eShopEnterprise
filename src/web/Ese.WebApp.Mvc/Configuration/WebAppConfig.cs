@@ -19,6 +19,8 @@ namespace Ese.WebApp.Mvc.Configuration
                 app.UseStatusCodePagesWithRedirects("erro/{0}");
                 app.UseHsts();
             }
+            else
+                app.UseDeveloperExceptionPage();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

@@ -28,7 +28,7 @@ namespace Ese.WebApp.Mvc.Extensions
         {
             if (httpRequestException.StatusCode == HttpStatusCode.Unauthorized)
             {
-                context.Response.Redirect("/login");
+                context.Response.Redirect($"/login?RedirectUrl={context.Request.Path}");
                 return;
             }
 

@@ -44,15 +44,17 @@ namespace Ese.WebApp.Mvc.Controllers
 
         [HttpGet]
         [Route("login")]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login(UsuarioLoginViewModel usuarioLogin)
+        public async Task<IActionResult> Login(UsuarioLoginViewModel usuarioLogin, string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             if (!ModelState.IsValid) return View(usuarioLogin);
 
             var resposta = await _autenticationService.Login(usuarioLogin);
@@ -61,8 +63,10 @@ namespace Ese.WebApp.Mvc.Controllers
                 return View(usuarioLogin);
 
             await RealizarLogin(resposta);
+            if (string.IsNullOrEmpty(returnUrl))
+                return RedirectToAction("Index", "Home");
 
-            return RedirectToAction("Index", "Home");
+            return LocalRedirect(returnUrl);
         }
 
         [HttpGet]
