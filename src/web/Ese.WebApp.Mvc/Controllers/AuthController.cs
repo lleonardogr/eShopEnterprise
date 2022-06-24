@@ -69,6 +69,7 @@ namespace Ese.WebApp.Mvc.Controllers
         [Route("sair")]
         public async Task<IActionResult> Logout()
         {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
         }
 
