@@ -1,9 +1,11 @@
 ﻿using Ese.Catalogo.Api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static Ese.WebApi.Core.Identidade.CustomAuthorization;
 
 namespace Ese.Catalogo.Api.Controllers
 {
+    [Authorize]
     public class CatalogoController : Controller
     {
         private readonly IProdutoRepository _produtoRepository;
@@ -20,7 +22,7 @@ namespace Ese.Catalogo.Api.Controllers
             return await _produtoRepository.ObterTodos();
         }
 
-        //[ClaimsAuthorize("Catalogo", "Ler")]
+        [ClaimsAuthorize("Catalogo", "Ler")]
         [HttpGet("catalogo/produtos/{id}")]
         public async Task<Produto> ProdutoDetalhe(Guid id)
         {
