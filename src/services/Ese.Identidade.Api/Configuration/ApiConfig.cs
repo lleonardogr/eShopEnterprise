@@ -1,4 +1,6 @@
-﻿namespace Ese.Identidade.Api.Configuration
+﻿using Ese.WebApi.Core.Identidade;
+
+namespace Ese.Identidade.Api.Configuration
 {
     public static class ApiConfig
     {
@@ -23,7 +25,7 @@
 
             app.UseHttpsRedirection();
 
-            app.UseIdentityConfiguration();
+            app.UseAuthConfiguration();
 
             app.MapControllers();
 

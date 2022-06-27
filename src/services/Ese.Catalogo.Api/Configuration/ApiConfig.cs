@@ -1,4 +1,5 @@
 ﻿using Ese.Catalogo.Api.Data;
+using Ese.WebApi.Core.Identidade;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ese.Catalogo.Api.Configuration
@@ -42,6 +43,8 @@ namespace Ese.Catalogo.Api.Configuration
             app.UseHttpsRedirection();
 
             app.UseCors("Total");
+
+            app.UseAuthConfiguration();
 
             app.MapControllers();
 

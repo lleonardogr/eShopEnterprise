@@ -43,6 +43,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ese.Pagamento.Api", "src\se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ese.Pedido.Api", "src\services\Ese.Pedido.Api\Ese.Pedido.Api.csproj", "{DE7EB917-EAE4-4963-A773-493D73787C48}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{0DD199BD-DD7F-4EBF-998E-8C0E8E583B3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ese.WebApi.Core", "src\buildingBlocks\Ese.WebApi.Core\Ese.WebApi.Core.csproj", "{E44E9542-88CB-47EA-A358-86CE086D0C6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +85,10 @@ Global
 		{DE7EB917-EAE4-4963-A773-493D73787C48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE7EB917-EAE4-4963-A773-493D73787C48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE7EB917-EAE4-4963-A773-493D73787C48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E44E9542-88CB-47EA-A358-86CE086D0C6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E44E9542-88CB-47EA-A358-86CE086D0C6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E44E9542-88CB-47EA-A358-86CE086D0C6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E44E9542-88CB-47EA-A358-86CE086D0C6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +113,8 @@ Global
 		{9AED668B-8DA7-4484-8A2B-7EECA390720C} = {C17872F7-A9AE-4F7D-B943-F1104D74D348}
 		{0DEEF110-77B3-4A8D-A0EC-01631264EC44} = {1E26516A-4FF5-4371-8DDF-EC1A23955D0E}
 		{DE7EB917-EAE4-4963-A773-493D73787C48} = {BB1CF0A7-4845-4090-922A-31E98BE54EFB}
+		{0DD199BD-DD7F-4EBF-998E-8C0E8E583B3B} = {91C0A23D-6027-4B11-BA1E-ADD1B28CA920}
+		{E44E9542-88CB-47EA-A358-86CE086D0C6F} = {0DD199BD-DD7F-4EBF-998E-8C0E8E583B3B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BD2DC93A-C268-4CF3-B7B7-594D4FC34B12}

@@ -25,6 +25,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\buildingBlocks\Ese.Core\Ese.Core.csproj" />
+		<ProjectReference Include="..\..\buildingBlocks\Ese.WebApi.Core\Ese.WebApi.Core.csproj" />
 	</ItemGroup>
 	<ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Ese.Identidade.Api.Extensions
+﻿namespace Ese.WebApi.Core.Identidade
 {
     public class AppSettings
     {
