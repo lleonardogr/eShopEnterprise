@@ -26,7 +26,7 @@ namespace Ese.WebApp.Mvc.Controllers
 
         [HttpPost]
         [Route("nova-conta")]
-        public async Task<IActionResult> Registrar(UsuarioRegistroViewModel usuarioRegistro)
+        public async Task<IActionResult> Registro(UsuarioRegistroViewModel usuarioRegistro)
         {
             if (!ModelState.IsValid) return View(usuarioRegistro);
 
