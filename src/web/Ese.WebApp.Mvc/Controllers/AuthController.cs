@@ -44,7 +44,7 @@ namespace Ese.WebApp.Mvc.Controllers
 
         [HttpGet]
         [Route("login")]
-        public IActionResult Login(string returnUrl = null)
+        public IActionResult Login(string? returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             return View();
@@ -52,7 +52,7 @@ namespace Ese.WebApp.Mvc.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login(UsuarioLoginViewModel usuarioLogin, string returnUrl = null)
+        public async Task<IActionResult> Login(UsuarioLoginViewModel usuarioLogin, string? returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (!ModelState.IsValid) return View(usuarioLogin);
