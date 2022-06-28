@@ -20,7 +20,7 @@ namespace Ese.Catalogo.Api.Configuration
             builder.Services.AddDbContext<CatalogoContext>(options => options.UseSqlServer(
                 builder.Configuration.GetConnectionString("eShopEnterprise")));
 
-            builder.RegisterServices();
+            
             builder.Services.AddControllers();
             builder.Services.AddCors(options =>
             {
@@ -30,8 +30,6 @@ namespace Ese.Catalogo.Api.Configuration
                         .AllowAnyMethod()
                         .AllowAnyHeader());
             });
-
-            builder.AddSwaggerConfiguration();
 
             return builder;
         }

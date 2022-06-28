@@ -1,10 +1,11 @@
 ﻿using Ese.Catalogo.Api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using static Ese.WebApi.Core.Identidade.CustomAuthorization;
+using static Ese.WebApi.Core.Identidade.CustomAuthorize;
 
 namespace Ese.Catalogo.Api.Controllers
 {
+    [ApiController]
     [Authorize]
     public class CatalogoController : Controller
     {

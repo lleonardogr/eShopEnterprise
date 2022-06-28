@@ -5,7 +5,7 @@ using System.Security.Claims;
 
 namespace Ese.WebApi.Core.Identidade
 {
-    public class CustomAuthorization
+    public class CustomAuthorize
     {
         public static bool ValidarClaimsUsuario(HttpContext context, string claimName, string claimValue)
         {
@@ -38,7 +38,7 @@ namespace Ese.WebApi.Core.Identidade
                     return;
                 }
 
-                if (!CustomAuthorization.ValidarClaimsUsuario(context.HttpContext, _claim.Type, _claim.Value))
+                if (!CustomAuthorize.ValidarClaimsUsuario(context.HttpContext, _claim.Type, _claim.Value))
                 {
                     context.Result = new StatusCodeResult(403);
                 }

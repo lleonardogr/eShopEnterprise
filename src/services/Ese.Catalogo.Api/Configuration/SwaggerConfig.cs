@@ -4,7 +4,7 @@ namespace Ese.Catalogo.Api.Configuration
 {
     public static class SwaggerConfig
     {
-        public static WebApplicationBuilder AddSwaggerConfiguration(this WebApplicationBuilder builder)
+        public static void AddSwaggerConfiguration(this WebApplicationBuilder builder)
         {
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -21,7 +21,7 @@ namespace Ese.Catalogo.Api.Configuration
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "Insira o token JWT desta maneira: Bearer {seu token}",
-                    Name = "Autorization",
+                    Name = "Authorization",
                     Scheme = "Bearer",
                     BearerFormat = "JWT",
                     In = ParameterLocation.Header,
@@ -30,21 +30,19 @@ namespace Ese.Catalogo.Api.Configuration
 
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
-                    { 
+                    {
                         new OpenApiSecurityScheme
-                        { 
+                        {
                             Reference = new OpenApiReference
-                            { 
+                            {
                                 Type = ReferenceType.SecurityScheme,
                                 Id = "Bearer"
                             }
                         },
-                        new string[] { }
+                        new string[] {}
                     }
                 });
             });
-
-            return builder;
         }
 
         public static WebApplication UseSwaggerConfiguration(this WebApplication app)

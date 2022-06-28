@@ -9,7 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.AddApiConfiguration();
+builder.AddSwaggerConfiguration();
 builder.AddJwtConfiguration();
+builder.RegisterServices();
 
 var app = builder.Build();
 

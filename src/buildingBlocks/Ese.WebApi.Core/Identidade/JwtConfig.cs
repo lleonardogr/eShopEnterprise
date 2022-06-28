@@ -40,9 +40,9 @@ namespace Ese.WebApi.Core.Identidade
 
         public static WebApplication UseAuthConfiguration(this WebApplication app)
         {
-            app.UseAuthorization();
             app.UseAuthentication();
-
+            app.UseAuthorization();
+            
             return app;
         }
     }
