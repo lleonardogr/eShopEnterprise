@@ -1,4 +1,6 @@
 ﻿using Ese.WebApp.Mvc.Extensions;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 namespace Ese.WebApp.Mvc.Configuration
 {
@@ -38,6 +40,15 @@ namespace Ese.WebApp.Mvc.Configuration
             app.UseRouting();
 
             app.UseIdentityConfiguration();
+
+            var supportedCultures = new[] { new CultureInfo("pt-BR") };
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("pt-BR"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
+
             app.UseMiddleware<ExceptionMiddleware>();
 
             app.MapControllerRoute(
