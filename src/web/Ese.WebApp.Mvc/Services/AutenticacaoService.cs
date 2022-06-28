@@ -18,30 +18,30 @@ namespace Ese.WebApp.Mvc.Services
         {
             var loginContent = ObterConteudo(usuarioLogin);
 
-            var response = await _httpClient.PostAsync("/api/identidade/autenticar", loginContent);
+            var response = await _httpClient.PostAsync($"/api/identidade/autenticar", loginContent);
 
             if (!TratarErrosResponse(response))
                 return new UsuarioRespostaLoginViewModel()
                 {
-                    ResponseResult = await DeserializarObjetoRespose<ResponseResultViewModel>(response)
+                    ResponseResult = await DeserializarObjetoResponse<ResponseResultViewModel>(response)
                 };
 
-            return await DeserializarObjetoRespose<UsuarioRespostaLoginViewModel>(response);
+            return await DeserializarObjetoResponse<UsuarioRespostaLoginViewModel>(response);
         }
 
         public async Task<UsuarioRespostaLoginViewModel> Registro(UsuarioRegistroViewModel usuarioRegistro)
         {
             var registroContent = ObterConteudo(usuarioRegistro);
 
-            var response = await _httpClient.PostAsync("/api/identidade/registrar", registroContent);
+            var response = await _httpClient.PostAsync($"/api/identidade/registrar", registroContent);
 
             if (!TratarErrosResponse(response))
                 return new UsuarioRespostaLoginViewModel()
                 {
-                    ResponseResult = await DeserializarObjetoRespose<ResponseResultViewModel>(response)
+                    ResponseResult = await DeserializarObjetoResponse<ResponseResultViewModel>(response)
                 };
 
-            return await DeserializarObjetoRespose<UsuarioRespostaLoginViewModel>(response);
+            return await DeserializarObjetoResponse<UsuarioRespostaLoginViewModel>(response);
         }
     }
 }

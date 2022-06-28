@@ -8,6 +8,7 @@ namespace Ese.WebApp.Mvc.Configuration
         public static void RegisterServices(this WebApplicationBuilder builder)
         {
             builder.Services.AddHttpClient<IAutenticacaoService, AutenticacaoService>();
+            builder.Services.AddHttpClient<ICatalogoService, CatalogoService>();
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             builder.Services.AddScoped<IUser, AspNetUser>();
         }

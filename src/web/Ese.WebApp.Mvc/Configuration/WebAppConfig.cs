@@ -42,7 +42,7 @@ namespace Ese.WebApp.Mvc.Configuration
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Catalogo}/{action=Index}/{id?}");
         }
     }
 }
