@@ -1,6 +1,9 @@
 ﻿using Ese.WebApp.Mvc.Extensions;
 using Ese.WebApp.Mvc.Services;
 using Ese.WebApp.Mvc.Services.Handler;
+using Polly;
+using Polly.Extensions.Http;
+using Polly.Retry;
 
 namespace Ese.WebApp.Mvc.Configuration
 {
@@ -10,17 +13,45 @@ namespace Ese.WebApp.Mvc.Configuration
         {
             builder.Services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
             builder.Services.AddHttpClient<IAutenticacaoService, AutenticacaoService>();
-            
-            //builder.Services.AddHttpClient<ICatalogoService, CatalogoService>()
-            //    .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
-            builder.Services.AddHttpClient("Refit", options => {
-                options.BaseAddress = new Uri(builder.Configuration.GetSection("CatalogoUrl").Value);
-            })
+
+            builder.Services.AddHttpClient<ICatalogoService, CatalogoService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
-                .AddTypedClient(Refit.RestService.For<ICatalogoServiceRefit>);
+                //.AddTransientHttpErrorPolicy(p => 
+                //p.WaitAndRetryAsync(3 , _ => TimeSpan.FromMilliseconds(600)));
+                .AddPolicyHandler(PollyExtensions.EsperarTentar())
+                .AddTransientHttpErrorPolicy(p => 
+                    p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+
+            //builder.Services.AddHttpClient("Refit", options => {
+            //    options.BaseAddress = new Uri(builder.Configuration.GetSection("CatalogoUrl").Value);
+            //})
+            //    .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
+            //    .AddTypedClient(Refit.RestService.For<ICatalogoServiceRefit>);
 
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             builder.Services.AddScoped<IUser, AspNetUser>();
+        }
+    }
+
+    public class PollyExtensions
+    {
+        public static AsyncRetryPolicy<HttpResponseMessage> EsperarTentar()
+        {
+            var retry = HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .WaitAndRetryAsync(new[]
+                {
+                    TimeSpan.FromSeconds(1),
+                    TimeSpan.FromSeconds(5),
+                    TimeSpan.FromSeconds(10),
+                }, (outcome, timespan, retryCount, context) =>
+                {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine($"Tentando pela {retryCount} vez!");
+                    Console.ForegroundColor = ConsoleColor.White;
+                });
+
+            return retry;
         }
     }
 }

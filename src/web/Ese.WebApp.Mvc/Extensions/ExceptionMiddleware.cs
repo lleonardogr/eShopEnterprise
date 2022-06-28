@@ -1,4 +1,5 @@
-﻿using Refit;
+﻿using Polly.CircuitBreaker;
+using Refit;
 using System.Net;
 
 namespace Ese.WebApp.Mvc.Extensions
@@ -30,6 +31,15 @@ namespace Ese.WebApp.Mvc.Extensions
             {
                 HandleRequestExceptionAsync(httpContext, ex.StatusCode);
             }
+            catch (BrokenCircuitException ex)
+            {
+                HandleCircuitBreakerExceptionAsync(httpContext);
+            }
+        }
+
+        private static void HandleCircuitBreakerExceptionAsync(HttpContext context)
+        {
+            context.Response.Redirect("/sistema-indisponivel");
         }
 
         private static void HandleRequestExceptionAsync(HttpContext context, HttpStatusCode statusCode)
@@ -40,7 +50,7 @@ namespace Ese.WebApp.Mvc.Extensions
                 return;
             }
 
-            context.Response.StatusCode = (int) statusCode;
+            context.Response.StatusCode = (int)statusCode;
         }
     }
 }
