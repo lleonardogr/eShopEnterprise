@@ -1,7 +1,7 @@
 ﻿using System;
 using Ese.Core.DomainObjects;
 
-namespace Ese.Clientes.API.Models
+namespace Ese.Cliente.Api.Models
 {
     public class Cliente : Entity, IAggregateRoot
     {

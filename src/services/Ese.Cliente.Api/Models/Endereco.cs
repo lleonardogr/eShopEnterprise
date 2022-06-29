@@ -1,7 +1,7 @@
 ﻿using System;
 using Ese.Core.DomainObjects;
 
-namespace Ese.Clientes.API.Models
+namespace Ese.Cliente.Api.Models
 {
     public class Endereco : Entity
     {
@@ -16,7 +16,7 @@ namespace Ese.Clientes.API.Models
 
         // EF Relation
         public Cliente Cliente { get; protected set; }
-
+        protected Endereco(){}
         public Endereco(string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado)
         {
             Logradouro = logradouro;
