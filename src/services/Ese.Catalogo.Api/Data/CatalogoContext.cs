@@ -1,5 +1,5 @@
 ﻿using Ese.Catalogo.Api.Models;
-using Ese.Core.DomainObjects.Data;
+using Ese.Core.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ese.Catalogo.Api.Data

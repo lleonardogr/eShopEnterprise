@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ese.Core.DomainObjects.Data
+namespace Ese.Core.Data
 {
     public interface IUnitOfWork
     {

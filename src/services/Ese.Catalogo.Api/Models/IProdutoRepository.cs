@@ -1,4 +1,4 @@
-﻿using Ese.Core.DomainObjects;
+﻿using Ese.Core.Data;
 
 namespace Ese.Catalogo.Api.Models
 {
