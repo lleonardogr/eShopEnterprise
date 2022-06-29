@@ -1,5 +1,6 @@
 using Ese.Cliente.Api.Configuration;
 using Ese.WebApi.Core.Identidade;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddApiConfiguration();
 builder.AddSwaggerConfiguration();
 builder.AddJwtConfiguration();
+builder.Services.AddMediatR(typeof(Program));
 builder.RegisterServices();
 
 var app = builder.Build();

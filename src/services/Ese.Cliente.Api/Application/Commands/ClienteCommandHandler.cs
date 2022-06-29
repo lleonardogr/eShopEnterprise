@@ -1,7 +1,29 @@
-﻿namespace Ese.Cliente.Api.Application.Commands
-{
-    public class ClienteCommandHandler
-    {
+﻿using MediatR;
+using FluentValidation.Results;
+using Ese.Cliente.Api.Models;
+using Ese.Core.Messages;
 
+namespace Ese.Cliente.Api.Application.Commands
+{
+    public class ClienteCommandHandler : CommandHandler, IRequestHandler<RegistrarClienteCommand, ValidationResult>
+    {
+        public async Task<ValidationResult> Handle(RegistrarClienteCommand message, CancellationToken cancellationToken)
+        {
+            if (!message.EhValido())
+                return message.ValidationResult;
+
+            var cliente = new Models.Cliente(message.Id, message.Nome, message.Email, message.Cpf);
+
+            //TODO; Validacoes
+            //TODO: Persistencia
+
+            if (true)
+            {
+                AdicionarErro("Este CPF já está em uso");
+                return ValidationResult;
+            }
+
+            return message.ValidationResult;
+        } 
     }
 }
