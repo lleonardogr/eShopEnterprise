@@ -1,6 +1,7 @@
 ﻿using Ese.WebApp.Mvc.Extensions;
 using Ese.WebApp.Mvc.Services;
 using Ese.WebApp.Mvc.Services.Handler;
+using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Retry;
@@ -11,6 +12,7 @@ namespace Ese.WebApp.Mvc.Configuration
     {
         public static void RegisterServices(this WebApplicationBuilder builder)
         {
+            builder.Services.AddSingleton<IValidationAttributeAdapterProvider, CpfValidationAttributeAdapterProvider>();
             builder.Services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
             builder.Services.AddHttpClient<IAutenticacaoService, AutenticacaoService>();
 

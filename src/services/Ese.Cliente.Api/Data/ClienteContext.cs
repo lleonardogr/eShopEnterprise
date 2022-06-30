@@ -5,15 +5,18 @@ using Ese.Cliente.Api.Models;
 using Ese.Core.Data;
 using Ese.Core.DomainObjects;
 using Ese.Core.Mediator;
+using Ese.Core.Messages;
 
 namespace Ese.Cliente.Api.Data
 {
     public sealed class ClienteContext : DbContext, IUnitOfWork
     {
         private readonly IMediatorHandler _mediatorHandler;
-        public ClienteContext(DbContextOptions<ClienteContext> options)
+
+        public ClienteContext(DbContextOptions<ClienteContext> options, IMediatorHandler mediatorHandler)
             : base(options)
         {
+            _mediatorHandler = mediatorHandler;
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             ChangeTracker.AutoDetectChangesEnabled = false;
         }
@@ -27,6 +30,7 @@ namespace Ese.Cliente.Api.Data
                 e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
                 property.SetColumnType("varchar(100)");
 
+            modelBuilder.Ignore<Event>();
             foreach (var relationship in modelBuilder.Model.GetEntityTypes()
                 .SelectMany(e => e.GetForeignKeys())) relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
 

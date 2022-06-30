@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Ese.WebApi.Core.Identidade;
+using Ese.WebApi.Core.Controllers;
 
 namespace Ese.Identidade.Api.Controllers
 {

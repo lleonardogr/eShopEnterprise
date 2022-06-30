@@ -1,5 +1,6 @@
 ﻿using Ese.Catalogo.Api.Models;
 using Ese.Core.Data;
+using Ese.Core.Messages;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ese.Catalogo.Api.Data
@@ -15,6 +16,7 @@ namespace Ese.Catalogo.Api.Data
                 e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
                 property.SetColumnType("varchar(100)");
 
+            modelBuilder.Ignore<Event>();
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogoContext).Assembly);
         }
 
