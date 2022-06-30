@@ -12,6 +12,7 @@ namespace Ese.Cliente.Api.Application.Commands
 
         public RegistrarClienteCommand(Guid id, string nome, string email, string cpf)
         {
+            AggregateId = id;
             Id = id;
             Nome = nome;
             Email = email;

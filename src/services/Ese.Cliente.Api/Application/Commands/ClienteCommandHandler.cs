@@ -2,6 +2,7 @@
 using FluentValidation.Results;
 using Ese.Cliente.Api.Models;
 using Ese.Core.Messages;
+using Ese.Cliente.Api.Application.Events;
 
 namespace Ese.Cliente.Api.Application.Commands
 {
@@ -29,6 +30,8 @@ namespace Ese.Cliente.Api.Application.Commands
             }
 
             _clienteRepository.Adicionar(cliente);
+            
+            cliente.AdicionarEvento(new ClienteRegistradoEvent(message.Id, message.Nome, message.Email, message.Cpf));
 
             return await PersistirDados(_clienteRepository.UnitOfWork);
         } 

@@ -4,6 +4,7 @@ using MediatR;
 using FluentValidation.Results;
 using Ese.Cliente.Api.Application.Commands;
 using Ese.Cliente.Api.Models;
+using Ese.Cliente.Api.Application.Events;
 
 namespace Ese.Cliente.Api.Configuration
 {
@@ -13,6 +14,8 @@ namespace Ese.Cliente.Api.Configuration
         {
             builder.Services.AddScoped<IMediatorHandler, MediatorHandler>();
             builder.Services.AddScoped<IRequestHandler<RegistrarClienteCommand,ValidationResult>, ClienteCommandHandler>();
+
+            builder.Services.AddScoped<INotificationHandler<ClienteRegistradoEvent>, ClienteEventHandler>();
 
             builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
             builder.Services.AddScoped<ClienteContext>();
