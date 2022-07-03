@@ -13,6 +13,11 @@ namespace Ese.WebApp.Mvc.Controllers
             _logger = logger;
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         [Route("sistema-indisponivel")]
         public IActionResult SistemaIndisponivel()
         {

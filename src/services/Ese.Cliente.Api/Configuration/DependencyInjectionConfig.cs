@@ -5,6 +5,8 @@ using FluentValidation.Results;
 using Ese.Cliente.Api.Application.Commands;
 using Ese.Cliente.Api.Models;
 using Ese.Cliente.Api.Application.Events;
+using Ese.Cliente.Api.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Ese.Cliente.Api.Configuration
 {
@@ -19,6 +21,8 @@ namespace Ese.Cliente.Api.Configuration
 
             builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
             builder.Services.AddScoped<ClienteContext>();
+
+            builder.Services.AddHostedService<RegistroClienteIntegrationHandler>();
         }
     }
 }

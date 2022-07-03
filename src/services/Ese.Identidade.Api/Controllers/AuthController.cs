@@ -10,6 +10,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Ese.WebApi.Core.Identidade;
 using Ese.WebApi.Core.Controllers;
+using Ese.Core.Messages.Integration;
+using EasyNetQ;
 
 namespace Ese.Identidade.Api.Controllers
 {
@@ -20,8 +22,8 @@ namespace Ese.Identidade.Api.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly AppSettings _appSettings;
-
-        public AuthController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, 
+        private IBus _bus;
+        public AuthController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager,
             IOptions<AppSettings> appSettings)
         {
             _signInManager = signInManager;
@@ -33,7 +35,7 @@ namespace Ese.Identidade.Api.Controllers
         public async Task<ActionResult> Registrar(UsuarioRegistroViewModel usuarioRegistro)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
-            
+
             var user = new IdentityUser()
             {
                 UserName = usuarioRegistro.Email,
@@ -44,7 +46,10 @@ namespace Ese.Identidade.Api.Controllers
             var result = await _userManager.CreateAsync(user, usuarioRegistro.Senha);
 
             if (result.Succeeded)
+            {
+                var sucesso = await RegistrarCliente(usuarioRegistro);
                 return CustomResponse(await GerarJwt(usuarioRegistro.Email));
+            }
 
             foreach (var error in result.Errors)
                 AdicionarErroProcessamento(error.Description);
@@ -52,12 +57,24 @@ namespace Ese.Identidade.Api.Controllers
             return CustomResponse();
         }
 
+        private async Task<ResponseMessage> RegistrarCliente(UsuarioRegistroViewModel usuarioRegistro)
+        {
+            var usuario = await _userManager.FindByEmailAsync(usuarioRegistro.Email);
+            var usuarioRegistrado = new UsuarioRegistradoIntegrationEvent(
+                Guid.Parse(usuario.Id), usuarioRegistro.Nome, usuarioRegistro.Email, usuarioRegistro.Cpf);
+
+            _bus = RabbitHutch.CreateBus("host=localhost:5672");
+            var sucesso = await _bus.Rpc.RequestAsync<UsuarioRegistradoIntegrationEvent, ResponseMessage>(usuarioRegistrado);
+
+            return sucesso;
+        }
+
         [HttpPost("autenticar")]
         public async Task<ActionResult> Login(UsuarioLoginViewModel usuarioLogin)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
-            var result = await _signInManager.PasswordSignInAsync(usuarioLogin.Email, usuarioLogin.Senha, 
+            var result = await _signInManager.PasswordSignInAsync(usuarioLogin.Email, usuarioLogin.Senha,
                 false, true);
 
             if (result.Succeeded)

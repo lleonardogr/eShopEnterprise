@@ -33,7 +33,7 @@ namespace Ese.WebApp.Mvc.Services
         {
             var registroContent = ObterConteudo(usuarioRegistro);
 
-            var response = await _httpClient.PostAsync($"/api/identidade/registrar", registroContent);
+            var response = await _httpClient.PostAsync($"/api/identidade/nova-conta", registroContent);
 
             if (!TratarErrosResponse(response))
                 return new UsuarioRespostaLoginViewModel()
