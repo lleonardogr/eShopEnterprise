@@ -21,8 +21,6 @@ namespace Ese.Cliente.Api.Configuration
 
             builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
             builder.Services.AddScoped<ClienteContext>();
-
-            builder.Services.AddHostedService<RegistroClienteIntegrationHandler>();
         }
     }
 }

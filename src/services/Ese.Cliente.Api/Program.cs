@@ -10,6 +10,7 @@ builder.AddSwaggerConfiguration();
 builder.AddJwtConfiguration();
 builder.Services.AddMediatR(typeof(Program));
 builder.RegisterServices();
+builder.AddMessageBusConfiguration();
 
 var app = builder.Build();
 

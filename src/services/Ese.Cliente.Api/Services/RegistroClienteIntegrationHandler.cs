@@ -1,30 +1,42 @@
-﻿using EasyNetQ;
-using Ese.Cliente.Api.Application.Commands;
+﻿using Ese.Cliente.Api.Application.Commands;
 using Ese.Core.Mediator;
 using Ese.Core.Messages.Integration;
+using Ese.MessageBus;
 using FluentValidation.Results;
 
 namespace Ese.Cliente.Api.Services
 {
     public class RegistroClienteIntegrationHandler : BackgroundService
     {
-        private IBus _bus;
+        private readonly IMessageBus _bus;
         private readonly IServiceProvider _serviceProvider;
 
-        public RegistroClienteIntegrationHandler(IServiceProvider serviceProvider)
+        public RegistroClienteIntegrationHandler(IMessageBus bus,IServiceProvider serviceProvider)
         {
+            _bus = bus;
             _serviceProvider = serviceProvider;
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _bus = RabbitHutch.CreateBus("host=localhost:5672");
-            _bus.Rpc.RespondAsync<UsuarioRegistradoIntegrationEvent, ResponseMessage>(
-                async request => new ResponseMessage(await RegistrarCliente(request)));
-
+            SetResponder();
             return Task.CompletedTask;
         }
-        private async Task<ValidationResult> RegistrarCliente(UsuarioRegistradoIntegrationEvent message)
+
+        private void OnConnect(object S, EventArgs e)
+        {
+            SetResponder();
+        }
+
+        private void SetResponder()
+        {
+            _bus.RespondAsync<UsuarioRegistradoIntegrationEvent, ResponseMessage>(
+                async request => await RegistrarCliente(request));
+
+            _bus.AdvancedBus.Connected += OnConnect;
+        }
+
+        private async Task<ResponseMessage> RegistrarCliente(UsuarioRegistradoIntegrationEvent message)
         {
             var clienteCommand = new RegistrarClienteCommand(message.Id, message.Nome, message.Email, message.Cpf);
             ValidationResult sucesso;
@@ -33,7 +45,7 @@ namespace Ese.Cliente.Api.Services
                 var mediator = scope.ServiceProvider.GetRequiredService<IMediatorHandler>();
                 sucesso = await mediator.EnviarComando(clienteCommand);
             }
-            return sucesso;
+            return new ResponseMessage(sucesso);
         }
     }
 }
