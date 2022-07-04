@@ -18,19 +18,27 @@ namespace Ese.Carrinho.Api.Models
 
         public Guid CarrinhoId { get; set; }
 
+        [JsonIgnore]
         public CarrinhoCliente CarrinhoCliente { get; set; }
 
         internal void AssociarCarrinho(Guid carrinhoId)
         {
             CarrinhoId = carrinhoId;
         }
+
         internal decimal CalcularValor()
         {
             return Quantidade * Valor;
         }
+
         internal void AdicionarUnidades(int unidades)
         {
             Quantidade += unidades;
+        }
+
+        internal void AtualizarUnidades(int unidades)
+        {
+            Quantidade = unidades;
         }
 
         internal bool EhValido()
