@@ -1,13 +1,14 @@
-﻿using Ese.WebApp.Mvc.Extensions;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
+using Ese.WebApi.Core.Usuario;
+using Ese.WebApp.Mvc.Extensions;
 
 namespace Ese.WebApp.Mvc.Services.Handler
 {
     public class HttpClientAuthorizationDelegatingHandler : DelegatingHandler
     {
-        private readonly IUser _user;
+        private readonly IAspNetUser _user;
 
-        public HttpClientAuthorizationDelegatingHandler(IUser user)
+        public HttpClientAuthorizationDelegatingHandler(IAspNetUser user)
         {
             _user = user;
         }

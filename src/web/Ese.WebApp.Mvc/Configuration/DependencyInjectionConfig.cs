@@ -1,4 +1,5 @@
-﻿using Ese.WebApp.Mvc.Extensions;
+﻿using Ese.WebApi.Core.Usuario;
+using Ese.WebApp.Mvc.Extensions;
 using Ese.WebApp.Mvc.Services;
 using Ese.WebApp.Mvc.Services.Handler;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
@@ -31,7 +32,7 @@ namespace Ese.WebApp.Mvc.Configuration
             //    .AddTypedClient(Refit.RestService.For<ICatalogoServiceRefit>);
 
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            builder.Services.AddScoped<IUser, AspNetUser>();
+            builder.Services.AddScoped<IAspNetUser, AspNetUser>();
         }
     }
 
