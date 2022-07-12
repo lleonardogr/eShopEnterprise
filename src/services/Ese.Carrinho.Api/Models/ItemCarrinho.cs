@@ -1,25 +1,26 @@
 ﻿using FluentValidation;
+using System.Text.Json.Serialization;
 
 namespace Ese.Carrinho.Api.Models
 {
-    public class CarrinhoItem
+    public class ItemCarrinho
     {
-        public CarrinhoItem()
+        public ItemCarrinho()
         {
             Id = Guid.NewGuid();
         }
 
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public Guid ProdutoId { get; set; }
-        public string Nome { get; set; }
+        public string? Nome { get; set; }
         public int Quantidade { get; set; }
         public decimal Valor { get; set; }
-        public string Imagem { get; set; }
+        public string? Imagem { get; set; }
 
         public Guid CarrinhoId { get; set; }
 
         [JsonIgnore]
-        public CarrinhoCliente CarrinhoCliente { get; set; }
+        public CarrinhoCliente? CarrinhoCliente { get; set; }
 
         internal void AssociarCarrinho(Guid carrinhoId)
         {
@@ -46,7 +47,7 @@ namespace Ese.Carrinho.Api.Models
             return new ItemCarrinhoValidation().Validate(this).IsValid;
         }
 
-        public class ItemCarrinhoValidation : AbstractValidator<CarrinhoItem>
+        public class ItemCarrinhoValidation : AbstractValidator<ItemCarrinho>
         {
             public ItemCarrinhoValidation()
             {

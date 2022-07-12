@@ -10,7 +10,7 @@ namespace Ese.Carrinho.Api.Models
         public Guid Id { get; set; }
         public Guid ClienteId { get; set; }
         public decimal ValorTotal { get; set; }
-        public List<CarrinhoItem> Itens { get; set; } = new List<CarrinhoItem>();
+        public List<ItemCarrinho> Itens { get; set; } = new List<ItemCarrinho>();
         public ValidationResult ValidationResult { get; set; }
 
         public CarrinhoCliente(Guid clienteId)
@@ -26,17 +26,17 @@ namespace Ese.Carrinho.Api.Models
             ValorTotal = Itens.Sum(p => p.CalcularValor());
         }
 
-        internal bool CarrinhoItemExistente(CarrinhoItem item)
+        internal bool CarrinhoItemExistente(ItemCarrinho item)
         {
             return Itens.Any(p => p.ProdutoId == item.ProdutoId);
         }
 
-        internal CarrinhoItem ObterPorProdutoId(Guid produtoId)
+        internal ItemCarrinho ObterPorProdutoId(Guid produtoId)
         {
             return Itens.FirstOrDefault(p => p.ProdutoId == produtoId);
         }
 
-        internal void AdicionarItem(CarrinhoItem item)
+        internal void AdicionarItem(ItemCarrinho item)
         {
             item.AssociarCarrinho(Id);
 
@@ -53,7 +53,7 @@ namespace Ese.Carrinho.Api.Models
             CalcularValorCarrinho();
         }
 
-        internal void AtualizarItem(CarrinhoItem item)
+        internal void AtualizarItem(ItemCarrinho item)
         {
             item.AssociarCarrinho(Id);
 
@@ -65,13 +65,13 @@ namespace Ese.Carrinho.Api.Models
             CalcularValorCarrinho();
         }
 
-        internal void AtualizarUnidades(CarrinhoItem item, int unidades)
+        internal void AtualizarUnidades(ItemCarrinho item, int unidades)
         {
             item.AtualizarUnidades(unidades);
             AtualizarItem(item);
         }
 
-        internal void RemoverItem(CarrinhoItem item)
+        internal void RemoverItem(ItemCarrinho item)
         {
             Itens.Remove(ObterPorProdutoId(item.ProdutoId));
             CalcularValorCarrinho();
@@ -80,7 +80,7 @@ namespace Ese.Carrinho.Api.Models
         internal bool EhValido()
         {
             var erros = Itens.SelectMany(i => 
-                new CarrinhoItem.ItemCarrinhoValidation().Validate(i).Errors).ToList();
+                new ItemCarrinho.ItemCarrinhoValidation().Validate(i).Errors).ToList();
 
             erros.AddRange(new CarrinhoClienteValidation().Validate(this).Errors);
             ValidationResult = new ValidationResult(erros);

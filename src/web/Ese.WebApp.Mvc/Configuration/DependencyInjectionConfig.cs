@@ -14,6 +14,11 @@ namespace Ese.WebApp.Mvc.Configuration
         public static void RegisterServices(this WebApplicationBuilder builder)
         {
             builder.Services.AddSingleton<IValidationAttributeAdapterProvider, CpfValidationAttributeAdapterProvider>();
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            builder.Services.AddScoped<IAspNetUser, AspNetUser>();
+
+
+            #region HttpServices
             builder.Services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
             builder.Services.AddHttpClient<IAutenticacaoService, AutenticacaoService>();
 
@@ -31,11 +36,21 @@ namespace Ese.WebApp.Mvc.Configuration
             //    .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
             //    .AddTypedClient(Refit.RestService.For<ICatalogoServiceRefit>);
 
-            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            builder.Services.AddScoped<IAspNetUser, AspNetUser>();
+            builder.Services.AddHttpClient<ICarrinhoService, CarrinhoService>()
+               .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
+               //.AddTransientHttpErrorPolicy(p => 
+               //p.WaitAndRetryAsync(3 , _ => TimeSpan.FromMilliseconds(600)));
+               .AddPolicyHandler(PollyExtensions.EsperarTentar())
+               .AddTransientHttpErrorPolicy(p =>
+                   p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+
+            #endregion
+
+
         }
     }
 
+    #region PollyExtensions
     public class PollyExtensions
     {
         public static AsyncRetryPolicy<HttpResponseMessage> EsperarTentar()
@@ -57,4 +72,6 @@ namespace Ese.WebApp.Mvc.Configuration
             return retry;
         }
     }
+
+    #endregion
 }

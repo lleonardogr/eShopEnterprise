@@ -1,4 +1,5 @@
 ﻿using Ese.WebApp.Mvc.Extensions;
+using Ese.WebApp.Mvc.Models;
 using System.Text;
 using System.Text.Json;
 
@@ -40,6 +41,11 @@ namespace Ese.WebApp.Mvc.Services
 
             response.EnsureSuccessStatusCode();
             return true;
+        }
+
+        protected ResponseResultViewModel RetornoOk()
+        {
+            return new ResponseResultViewModel();
         }
     }
 }

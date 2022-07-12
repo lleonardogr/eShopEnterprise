@@ -11,7 +11,7 @@ namespace Ese.WebApi.Core.Usuario
         {
             _accessor = accessor;
         }
-        public string Name => _accessor.HttpContext.User.Identity.Name;
+        public string Name => _accessor.HttpContext.User?.Identity?.Name;
 
         public Guid ObterUserId()
         {

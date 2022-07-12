@@ -13,7 +13,7 @@ namespace Ese.Carrinho.Api.Data
             ChangeTracker.AutoDetectChangesEnabled = false;
         }
 
-        public DbSet<CarrinhoItem> CarrinhoItens { get; set; }
+        public DbSet<ItemCarrinho> CarrinhoItens { get; set; }
         public DbSet<CarrinhoCliente> CarrinhoCliente { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

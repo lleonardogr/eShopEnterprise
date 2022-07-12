@@ -28,7 +28,7 @@ namespace Ese.Carrinho.Api.Controllers
         }
 
         [HttpPost("carrinho")]
-        public async Task<IActionResult> AdicionarItemCarrinho(CarrinhoItem item)
+        public async Task<IActionResult> AdicionarItemCarrinho(ItemCarrinho item)
         {
             var carrinho = await ObterCarrinhoCliente();
 
@@ -44,7 +44,7 @@ namespace Ese.Carrinho.Api.Controllers
         }
 
         [HttpPut("carrinho/{produtoId}")]
-        public async Task<IActionResult> AtualizarItemCarrinho(Guid produtoId, CarrinhoItem item)
+        public async Task<IActionResult> AtualizarItemCarrinho(Guid produtoId, ItemCarrinho item)
         {
             var carrinho = await ObterCarrinhoCliente();
             var itemCarrinho = await ObterItemCarrinhoValidado(produtoId, carrinho, item);
@@ -90,7 +90,7 @@ namespace Ese.Carrinho.Api.Controllers
                 .Include(c => c.Itens)
                 .FirstOrDefaultAsync(c => c.ClienteId == _user.ObterUserId());
         }
-        private void ManipularNovoCarrinho(CarrinhoItem item)
+        private void ManipularNovoCarrinho(ItemCarrinho item)
         {
             var carrinho = new CarrinhoCliente(_user.ObterUserId());
             carrinho.AdicionarItem(item);
@@ -98,7 +98,7 @@ namespace Ese.Carrinho.Api.Controllers
             ValidarCarrinho(carrinho);
             _context.CarrinhoCliente.Add(carrinho);
         }
-        private void ManipularCarrinhoExistente(CarrinhoCliente carrinho, CarrinhoItem item)
+        private void ManipularCarrinhoExistente(CarrinhoCliente carrinho, ItemCarrinho item)
         {
             var produtoItemExistente = carrinho.CarrinhoItemExistente(item);
 
@@ -116,7 +116,7 @@ namespace Ese.Carrinho.Api.Controllers
 
             _context.CarrinhoCliente.Update(carrinho);
         }
-        private async Task<CarrinhoItem> ObterItemCarrinhoValidado(Guid produtoId, CarrinhoCliente carrinho, CarrinhoItem item = null)
+        private async Task<ItemCarrinho> ObterItemCarrinhoValidado(Guid produtoId, CarrinhoCliente carrinho, ItemCarrinho item = null)
         {
             if (item != null && produtoId != item.ProdutoId)
             {

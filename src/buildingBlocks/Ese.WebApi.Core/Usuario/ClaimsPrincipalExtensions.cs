@@ -9,7 +9,7 @@ namespace Ese.WebApi.Core.Usuario
             if (principal == null)
                 throw new ArgumentException(nameof(principal));
 
-            var claim = principal.FindFirst("sub");
+            var claim = principal.FindFirst(ClaimTypes.NameIdentifier /*sub*/);
             return claim?.Value;
         }
 
